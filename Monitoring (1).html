@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+  <title>Bengkel Internet Of Things</title>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <img src="img/Telnet.png" width="30px" height="35px">
+    <a class="navbar-brand" href="index.html"> IoT WEB SERVER</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="index.html">Home<span class="sr-only">(current)</span></a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Controlling
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="Controlling.html">RGB LED</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Monitoring
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="Monitoring.html">Temperature and Humidity</a>
+          </div>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Type here .." aria-label="Search">
+        <button class="btn btn-outline-primary bg-light my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+</head>
+
+<body>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyAOUUcigZF2tU2HB4WJklFev0QjCPDU9FI",
+      authDomain: "dht11-d1bd3.firebaseapp.com",
+      databaseURL: "https://dht11-d1bd3.firebaseio.com",
+      projectId: "dht11-d1bd3",
+      storageBucket: "dht11-d1bd3.appspot.com",
+      messagingSenderId: "393447295874",
+      appId: "1:393447295874:web:921dddafa8f5d233581d9b",
+      measurementId: "G-80NKKCTSCQ"
+    };
+    firebase.initializeApp(config);
+
+    const fbase = firebase.database().ref("TEMPERATURE");
+    fbase.on("value", snap => {
+      document.getElementById("angka").innerText = snap.val();
+    })
+    const fbase2 = firebase.database().ref("HUMIDITY");
+    fbase2.on("value", snap => {
+      document.getElementById("angka2").innerText = snap.val();
+    })
+
+  </script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.6.5/firebase.js"></script>
+
+  <br>
+  <br>
+  <br>
+
+  <!--Monitoring-->
+  <section class="monitoring" id="monitoring">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <h2 class="text-center">Monitoring Temperature</h2>
+          <hr>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <img src="img/Temp.png" class="img-responsive center-block">
+      </div>
+      <div class="col-sm-6">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="card text-center">
+              <div class="card-body">
+                <h1 class="card-title bg-primary">Suhu</h1>
+                <h2 id="angka" class="card-text"></h2>
+                <h2>&degC</h2>
+              </div>
+              <div class="card-body">
+                <h1 class="card-title bg-primary">Kelembaban</h1>
+                <h2 id="angka2" class="card-text"></h2>
+                <h2>%</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+</body>
+
+</html>
